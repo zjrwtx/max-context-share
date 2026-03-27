@@ -2,11 +2,14 @@
 
 CLI tool to export and import OpenClaw skills, workspace context files, and config fragments as a portable `.tar.gz` bundle.
 
+> **⚠️ Note:** The npm package has not been published yet. It will be available on npm very soon — stay tuned!
+> For now, please use **Option B** below to run directly from source.
+
 ## Running the CLI
 
 There are two ways to use `max-ctx` — pick whichever fits your workflow.
 
-### Option A: via npm (recommended for most users)
+### Option A: via npm (coming soon)
 
 ```bash
 # Run once without installing
@@ -19,7 +22,7 @@ max-ctx export
 max-ctx import ./sample-context.tar.gz
 ```
 
-### Option B: run directly from source (no npm install needed)
+### Option B: run directly from source (recommended for now)
 
 Clone or download this package, then run the built output with Node directly:
 
