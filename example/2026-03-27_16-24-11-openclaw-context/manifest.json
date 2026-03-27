@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-03-27T16:24:11.134Z",
+  "skills": [
+    {
+      "slug": "1password",
+      "source": "bundled"
+    },
+    {
+      "slug": "apple-notes",
+      "source": "bundled"
+    },
+    {
+      "slug": "apple-reminders",
+      "source": "bundled"
+    },
+    {
+      "slug": "bear-notes",
+      "source": "bundled"
+    },
+    {
+      "slug": "blogwatcher",
+      "source": "bundled"
+    },
+    {
+      "slug": "blucli",
+      "source": "bundled"
+    },
+    {
+      "slug": "bluebubbles",
+      "source": "bundled"
+    },
+    {
+      "slug": "camsnap",
+      "source": "bundled"
+    },
+    {
+      "slug": "canvas",
+      "source": "bundled"
+    },
+    {
+      "slug": "clawhub",
+      "source": "bundled"
+    },
+    {
+      "slug": "coding-agent",
+      "source": "bundled"
+    },
+    {
+      "slug": "discord",
+      "source": "bundled"
+    },
+    {
+      "slug": "eightctl",
+      "source": "bundled"
+    },
+    {
+      "slug": "gemini",
+      "source": "bundled"
+    },
+    {
+      "slug": "gh-issues",
+      "source": "bundled"
+    },
+    {
+      "slug": "gifgrep",
+      "source": "bundled"
+    },
+    {
+      "slug": "github",
+      "source": "bundled"
+    },
+    {
+      "slug": "gog",
+      "source": "bundled"
+    },
+    {
+      "slug": "goplaces",
+      "source": "bundled"
+    },
+    {
+      "slug": "healthcheck",
+      "source": "bundled"
+    },
+    {
+      "slug": "himalaya",
+      "source": "bundled"
+    },
+    {
+      "slug": "imsg",
+      "source": "bundled"
+    },
+    {
+      "slug": "max_skills",
+      "source": "bundled"
+    },
+    {
+      "slug": "mcporter",
+      "source": "bundled"
+    },
+    {
+      "slug": "metaclaw",
+      "source": "bundled"
+    },
+    {
+      "slug": "model-usage",
+      "source": "bundled"
+    },
+    {
+      "slug": "nano-pdf",
+      "source": "bundled"
+    },
+    {
+      "slug": "node-connect",
+      "source": "bundled"
+    },
+    {
+      "slug": "notion",
+      "source": "bundled"
+    },
+    {
+      "slug": "obsidian",
+      "source": "bundled"
+    },
+    {
+      "slug": "openai-whisper",
+      "source": "bundled"
+    },
+    {
+      "slug": "openai-whisper-api",
+      "source": "bundled"
+    },
+    {
+      "slug": "openhue",
+      "source": "bundled"
+    },
+    {
+      "slug": "oracle",
+      "source": "bundled"
+    },
+    {
+      "slug": "ordercli",
+      "source": "bundled"
+    },
+    {
+      "slug": "peekaboo",
+      "source": "bundled"
+    },
+    {
+      "slug": "sag",
+      "source": "bundled"
+    },
+    {
+      "slug": "session-logs",
+      "source": "bundled"
+    },
+    {
+      "slug": "sherpa-onnx-tts",
+      "source": "bundled"
+    },
+    {
+      "slug": "skill-creator",
+      "source": "bundled"
+    },
+    {
+      "slug": "slack",
+      "source": "bundled"
+    },
+    {
+      "slug": "songsee",
+      "source": "bundled"
+    },
+    {
+      "slug": "sonoscli",
+      "source": "bundled"
+    },
+    {
+      "slug": "spotify-player",
+      "source": "bundled"
+    },
+    {
+      "slug": "summarize",
+      "source": "bundled"
+    },
+    {
+      "slug": "things-mac",
+      "source": "bundled"
+    },
+    {
+      "slug": "tinker",
+      "source": "bundled"
+    },
+    {
+      "slug": "tmux",
+      "source": "bundled"
+    },
+    {
+      "slug": "trello",
+      "source": "bundled"
+    },
+    {
+      "slug": "video-frames",
+      "source": "bundled"
+    },
+    {
+      "slug": "voice-call",
+      "source": "bundled"
+    },
+    {
+      "slug": "wacli",
+      "source": "bundled"
+    },
+    {
+      "slug": "weather",
+      "source": "bundled"
+    },
+    {
+      "slug": "xurl",
+      "source": "bundled"
+    },
+    {
+      "slug": "habit-reminder",
+      "source": "workspace"
+    }
+  ],
+  "workspaceFiles": [
+    "AGENTS.md",
+    "SOUL.md",
+    "TOOLS.md",
+    "IDENTITY.md",
+    "USER.md",
+    "HEARTBEAT.md",
+    "BOOTSTRAP.md"
+  ],
+  "hasConfigFragment": false
+}
