@@ -2,50 +2,42 @@
 
 CLI tool to export and import OpenClaw skills, workspace context files, and config fragments as a portable `.tar.gz` bundle.
 
-> **⚠️ Note:** The npm package has not been published yet. It will be available on npm very soon — stay tuned!
-> For now, please use **Option B** below to run directly from source.
+> **Note:** This is the Python rewrite of the original TypeScript version. Bundles are **fully compatible** between both versions.
 
 ## Running the CLI
 
-There are two ways to use `max-ctx` — pick whichever fits your workflow.
-
-### Option A: via npm (coming soon)
+### Option A: via pip / uv (recommended)
 
 ```bash
-# Run once without installing
-npx max-context-share export
-npx max-context-share import ./sample-context.tar.gz
+# Install with pip
+pip install max-context-share
 
-# Or install globally for repeated use
-npm install -g max-context-share
+# Or install with uv
+uv pip install max-context-share
+
+# Run
 max-ctx export
 max-ctx import ./sample-context.tar.gz
 ```
 
-### Option B: run directly from source (recommended for now)
+### Option B: run directly from source
 
-Clone or download this package, then run the built output with Node directly:
-
-```bash
-# 1. Enter the package directory
-cd packages/max-context-share
-
-# 2. Install dependencies
-npm install
-
-# 3. Build TypeScript
-npm run build
-
-# 4. Run directly with node
-node dist/index.js export
-node dist/index.js export --output /tmp/my-context.tar.gz
-node dist/index.js import /tmp/my-context.tar.gz --dry-run
-```
-
-You can also add a shell alias to make it feel like a real command:
+Clone or download this repo, then:
 
 ```bash
-alias max-ctx="node /path/to/packages/max-context-share/dist/index.js"
+# 1. Enter the project directory
+cd max-context-share
+
+# 2. Create venv and install with uv
+uv venv .venv --python=3.10
+uv sync
+
+# 3. Run via uv
+uv run max-ctx export
+uv run max-ctx import ./sample-context.tar.gz
+
+# Or activate the venv and run directly
+source .venv/bin/activate
 max-ctx export --dry-run
 ```
 
@@ -58,23 +50,23 @@ max-ctx export --dry-run
 Package your local OpenClaw skills, workspace files, and config fragment into a shareable archive:
 
 ```bash
-# Export everything (all skills from all sources + workspace files + config fragment)
+# Export everything (all skills + workspace files + config)
 max-ctx export
 
 # Specify output path
 max-ctx export --output /tmp/my-context.tar.gz
 
-# Export specific skills only (searched across all skill sources)
+# Export specific skills only
 max-ctx export --skills github,weather,habit-reminder
 
 # Exclude workspace files or config fragment
 max-ctx export --no-workspace
 max-ctx export --no-config-fragment
 
-# Preview what would be exported without creating the archive
+# Preview what would be exported
 max-ctx export --dry-run
 
-# Output result as JSON (useful for scripting)
+# JSON output (useful for scripting)
 max-ctx export --dry-run --json
 ```
 
@@ -83,7 +75,7 @@ max-ctx export --dry-run --json
 Import an archive into your local OpenClaw installation:
 
 ```bash
-# Import with merge strategy (default: skip existing files/skills)
+# Import with merge strategy (default: skip existing)
 max-ctx import /tmp/my-context.tar.gz
 
 # Overwrite existing skills and workspace files
@@ -92,7 +84,7 @@ max-ctx import /tmp/my-context.tar.gz --overwrite
 # Import only skills, skip workspace files
 max-ctx import /tmp/my-context.tar.gz --no-workspace
 
-# Preview what would be imported without making changes
+# Preview what would be imported
 max-ctx import /tmp/my-context.tar.gz --dry-run
 ```
 
@@ -106,24 +98,20 @@ The generated `.tar.gz` contains:
 
 ```
 <timestamp>-openclaw-context/
-  manifest.json              # Metadata: schema version, skills list, workspace files, etc.
+  manifest.json              # Metadata: schema version, skills list, etc.
   skills/
     bundled/                 # Skills shipped with openclaw
       <slug>/
         SKILL.md
         ...
-    managed/                 # Skills installed via `openclaw skills install`
+    managed/                 # Installed via `openclaw skills install`
       <slug>/
-        SKILL.md
     personal-agents/         # ~/.agents/skills/
       <slug>/
-        SKILL.md
     project-agents/          # <workspace>/.agents/skills/
       <slug>/
-        SKILL.md
     workspace/               # <workspace>/skills/
       <slug>/
-        SKILL.md
   workspace/
     AGENTS.md
     SOUL.md
@@ -189,6 +177,31 @@ Profile support: if `OPENCLAW_PROFILE=prod`, workspace resolves to `~/.openclaw/
 
 ---
 
+## Python API (Sync + Async)
+
+You can also use `max-context-share` as a library:
+
+```python
+from max_context_share.export_bundle import (
+    ExportOptions, run_export, async_run_export,
+)
+from max_context_share.import_bundle import (
+    ImportOptions, run_import, async_run_import,
+)
+
+# Sync
+result = run_export(ExportOptions(dry_run=True))
+print(result.skills)
+
+# Async
+import asyncio
+result = asyncio.run(
+    async_run_export(ExportOptions(dry_run=True))
+)
+```
+
+---
+
 ## Example
 
 An example bundle is included in the `example/` directory:
@@ -206,13 +219,28 @@ max-ctx import example/sample-context.tar.gz --dry-run
 ## Development
 
 ```bash
-# Type-check
-npm run typecheck   # or: npx tsc --noEmit
+# Setup
+uv venv .venv --python=3.10
+uv sync
 
-# Build
-npm run build
+# Lint
+uv run ruff check src/ tests/
 
-# Run directly from built output
-node dist/index.js --help
-node dist/index.js export --dry-run
+# Test (60 tests across 6 modules)
+uv run pytest -v
+
+# Run from source
+uv run max-ctx --help
+uv run max-ctx export --dry-run
 ```
+
+---
+
+## Cross-Compatibility
+
+Bundles created by the Python version are **fully compatible** with the TypeScript version and vice versa:
+
+- `manifest.json` uses identical camelCase keys (`schemaVersion`, `createdAt`, `workspaceFiles`, `hasConfigFragment`)
+- Archive directory layout is identical
+- Same 8 workspace files, same skill source precedence
+- Same config fragment safe-field extraction

@@ -147,7 +147,7 @@ version is exported.
 
 Import restores each skill to its original source
 directory. If the source directory does not exist,
-the skill is placed in `managed`.
+the skill is skipped with a warning.
 
 ---
 
@@ -156,7 +156,7 @@ the skill is placed in `managed`.
 ```json
 {
   "schemaVersion": 1,
-  "createdAt": "2026-03-28T00:00:00.000Z",
+  "createdAt": "2026-03-28T00:00:00.000000+00:00",
   "skills": [
     {
       "slug": "github",
@@ -171,7 +171,7 @@ the skill is placed in `managed`.
 }
 ```
 
-Validated at runtime using Zod schemas.
+Validated at runtime using Pydantic v2 models.
 
 ---
 
@@ -184,7 +184,7 @@ Only these safe fields are included:
   "agents": {
     "defaults": {
       "model": "claude-sonnet-4-20250514",
-      "thinking": true
+      "thinkingDefault": "enabled"
     },
     "list": [
       {

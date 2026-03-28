@@ -1,15 +1,33 @@
-node_modules/
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
 dist/
+build/
+.venv/
+*.whl
 
-*.tgz
-*.log
-npm-debug.log*
-coverage/
+# uv
+uv.lock
 
-.DS_Store
-Thumbs.db
+# Testing
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
 
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Archives (keep example/)
+*.tgz
+*.log

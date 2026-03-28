@@ -18,11 +18,18 @@ CLI tool (`max-ctx`) to export and import OpenClaw
 skills, workspace context files, and config fragments
 as a portable `.tar.gz` bundle.
 
+Built with Python, using click + pydantic + tarfile.
+
 ## Quick Start
 
 ```bash
-# Install globally
-npm install -g max-context-share
+# Install with uv
+uv pip install max-context-share
+
+# Or from source
+uv venv .venv --python=3.10
+uv sync
+uv run max-ctx --help
 
 # Export everything
 max-ctx export
@@ -135,6 +142,26 @@ max-ctx import ./bundle.tar.gz --json
   config-fragment.json
 ```
 
+## Python API (Sync + Async)
+
+```python
+from max_context_share.export_bundle import (
+    ExportOptions, run_export, async_run_export,
+)
+from max_context_share.import_bundle import (
+    ImportOptions, run_import, async_run_import,
+)
+
+# Sync
+result = run_export(ExportOptions(dry_run=True))
+
+# Async
+import asyncio
+result = asyncio.run(
+    async_run_export(ExportOptions(dry_run=True))
+)
+```
+
 ## Environment Variables
 
 | Variable | Default | Purpose |
@@ -149,10 +176,11 @@ workspace to `~/.openclaw/workspace-prod/`.
 ## Development
 
 ```bash
-npm run build       # Compile TypeScript
-npm run typecheck   # Type-check only
-npm run dev         # Watch mode
-node dist/index.js  # Run from source
+uv venv .venv --python=3.10
+uv sync
+uv run ruff check src/ tests/   # Lint
+uv run pytest -v                 # Test (60 tests)
+uv run max-ctx --help            # Run from source
 ```
 
 ## Troubleshooting

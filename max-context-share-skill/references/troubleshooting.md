@@ -21,7 +21,7 @@ source location.
 4. Set environment variable if needed:
    `export OPENCLAW_STATE_DIR=~/.openclaw`
 
-### "Skill not found: <slug>"
+### "Unknown skills: <slug>"
 
 **Cause:** The `--skills` flag references a slug
 that does not exist in any source.
@@ -59,10 +59,10 @@ installed in a non-standard location.
 
 ## Import Errors
 
-### "Invalid archive format"
+### "Archive appears empty"
 
 **Cause:** The file is not a valid `.tar.gz` or
-does not contain a `manifest.json`.
+does not contain the expected directory structure.
 
 **Fix:**
 1. Verify the file: `tar tf archive.tar.gz`
@@ -118,42 +118,42 @@ This is by design for security.
 3. Unset if needed:
    `unset OPENCLAW_PROFILE`
 
-### Node.js version too old
+### Python version too old
 
-**Symptom:** Syntax errors or module import failures.
+**Symptom:** Import errors or syntax errors.
 
 **Fix:**
-Requires Node.js >= 18.0.0:
+Requires Python >= 3.10:
 ```bash
-node --version
-# If < 18, upgrade Node.js
+python3 --version
+# If < 3.10, upgrade Python or use uv:
+uv venv .venv --python=3.10
 ```
 
 ---
 
 ## Development Issues
 
-### TypeScript compilation errors
+### Module not found errors
 
 ```bash
-# Clean and rebuild
-rm -rf dist/
-npm run build
+# Reinstall in development mode
+uv sync
+# Or force editable install
+uv pip install -e . --python .venv/bin/python
 ```
 
-### "Cannot find module" errors
+### Lint errors
 
 ```bash
-# Reinstall dependencies
-rm -rf node_modules/
-npm install
-npm run build
+# Auto-fix with ruff
+uv run ruff check --fix src/ tests/
 ```
 
 ### Running from source
 
 ```bash
-# Always build before running
-npm run build
-node dist/index.js export --dry-run
+# Always sync before running
+uv sync
+uv run max-ctx export --dry-run
 ```
